@@ -1,0 +1,85 @@
+# Introduction
+
+Everything in this document is open for debate and definitely needs re-writing.
+
+
+## Conventions and Terminology
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", 
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be 
+interpreted as described in BCP 14, RFC 2119 [](#RFC2119).
+
+# The Data Items
+
+## Container or Aggregate Data Item
+
+The Container Data Item allows a DLEP extension to parenthesize a set
+of data items, attaching some context to the subset of data items
+
+The Container Data Item contains the following fields:
+
+     0                   1                   2                   3
+     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    | Data Item Type                | Length                        |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    | Container Type                | Container Id Length           |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    :               Container Id (variable length)                  :
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    :               DLEP Data Items (zero or more)                  :
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    
+Data Item Type:
+:    TBD - Allocated from IANA "DLEP Data Item Values" registry.
+
+Length:
+:    4 + Id Length + Sum of lengths of contained DLEP Data Items.
+
+Container Type:
+:    A value allocated from a new [IANA "DLEP Container Values" registry](#di_cont_vals). 
+
+Container Id Length:
+:    The Length of the Container Id field.
+
+Container Id:
+:    0 or more octets used by an extension to identify the container instance. 
+
+DLEP Data Items:
+:    0 or more DLEP Data Items, as defined in [](#I-D.ietf-manet-dlep).
+
+
+
+# Security Considerations
+
+I'm not sure there are any.
+
+#  IANA Considerations
+
+##  Registrations
+
+Upon approval of this document, IANA is requested to create a new
+protocol registry for Dynamic Link Exchange Protocol (DLEP). The remainder
+of this section requests the creation of new DLEP specific registries.
+
+##  DLEP Container Values Registration    {#di_cont_vals}
+
+Upon approval of this document, IANA is requested to create a new DLEP
+registry, named "Container Type Values".
+
+The following table provides initial registry values and the 
+[](#RFC5226) defined policies that should apply to the registry:
+
+-----------------------------------------------------------
+Type Code           Description/Policy
+------------------- ---------------------------------------
+0                   Reserved
+
+1-65407             Specification Required
+
+65408-65534         Private Use
+
+65535               Reserved
+-----------------------------------------------------------
+
+
