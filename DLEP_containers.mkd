@@ -1,7 +1,11 @@
 # Introduction
 
-Everything in this document is open for debate and definitely needs re-writing.
+A DLEP Data Item Container defined by this document is a generic wrapper or
+container of DLEP Data Items, where the presence of the container around the
+Data Items implies a logical association between the Data Items in the Container.
 
+This document does not define a new DLEP extension, but does instead define a
+set of guidelines for DLEP extension authors.
 
 ## Conventions and Terminology
 
@@ -9,12 +13,10 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be 
 interpreted as described in BCP 14, RFC 2119 [](#RFC2119).
 
-# The Data Items
-
-## Container or Aggregate Data Item
+# Container Data Item
 
 The Container Data Item allows a DLEP extension to parenthesize a set
-of data items, attaching some context to the subset of data items
+of DLEP Data Items, implying a logical assocaition between the Data Items in the container.
 
 The Container Data Item contains the following fields:
 
@@ -23,32 +25,28 @@ The Container Data Item contains the following fields:
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     | Data Item Type                | Length                        |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    | Container Type                | Container Id Length           |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    :               Container Id (variable length)                  :
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     :               DLEP Data Items (zero or more)                  :
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     
 Data Item Type:
-:    TBD - Allocated from IANA "DLEP Data Item Values" registry.
+:    Defined by the extension.  Allocated from IANA "DLEP Data Item Values" registry.
 
 Length:
-:    4 + Id Length + Sum of lengths of contained DLEP Data Items.
-
-Container Type:
-:    A value allocated from a new [IANA "DLEP Container Values" registry](#di_cont_vals). 
-
-Container Id Length:
-:    The Length of the Container Id field.
-
-Container Id:
-:    0 or more octets used by an extension to identify the container instance. 
+:    Sum of Lengths of contained DLEP Data Items, including header lengths, i.e. the total length of the Container Data Item
 
 DLEP Data Items:
 :    0 or more DLEP Data Items, as defined in [](#I-D.ietf-manet-dlep).
 
+## Specification of Conatiner Data Items
 
+When the use of a Container Data Item is defined in a DLEP extension
+specification, the specification MUST define which DLEP Data Items are valid
+within the Conatiner, and also the multiplicity of Data Items in the Container.
+
+Unless otherwise allowed by an individual DLEP extension specification, any
+Data Item not defined as allowed in the Container MUST NOT appear, and an
+implementation receiving such a Data Item MUST teminate the DLEP session, using
+the DLEP Status Code 'Invalid Data'.
 
 # Security Considerations
 
@@ -56,30 +54,4 @@ I'm not sure there are any.
 
 #  IANA Considerations
 
-##  Registrations
-
-Upon approval of this document, IANA is requested to create a new
-protocol registry for Dynamic Link Exchange Protocol (DLEP). The remainder
-of this section requests the creation of new DLEP specific registries.
-
-##  DLEP Container Values Registration    {#di_cont_vals}
-
-Upon approval of this document, IANA is requested to create a new DLEP
-registry, named "Container Type Values".
-
-The following table provides initial registry values and the 
-[](#RFC5226) defined policies that should apply to the registry:
-
------------------------------------------------------------
-Type Code           Description/Policy
-------------------- ---------------------------------------
-0                   Reserved
-
-1-65407             Specification Required
-
-65408-65534         Private Use
-
-65535               Reserved
------------------------------------------------------------
-
-
+None.
