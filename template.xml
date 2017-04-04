@@ -3,7 +3,7 @@
 <!ENTITY pandocAbstract PUBLIC '' 'abstract.xml'>
 <!ENTITY pandocMiddle   PUBLIC '' 'DLEP_containers.xml'>
 <!ENTITY pandocBack     PUBLIC '' 'appendices.xml'>
-<!ENTITY DLEP           PUBLIC '' 'http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-manet-dlep-26.xml'>
+<!ENTITY DLEP           PUBLIC '' 'http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-manet-dlep-29.xml'>
 <!ENTITY RFC.2119       PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml'>
 <!ENTITY RFC.5226       PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5226.xml'>
 ]>
